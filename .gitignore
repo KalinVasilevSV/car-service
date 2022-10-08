@@ -1,0 +1,3 @@
+# gitignore for car-service project
+.idea/
+.gradle/
