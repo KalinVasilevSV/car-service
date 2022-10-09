@@ -14,7 +14,7 @@ public class ThymeleafConfig {
     public SpringResourceTemplateResolver templateResolver(ApplicationContext applicationContext){
         SpringResourceTemplateResolver templateResolver = new SpringResourceTemplateResolver();
         templateResolver.setApplicationContext(applicationContext);
-        templateResolver.setPrefix("/resources/templates");
+        templateResolver.setPrefix("classpath:/templates/");
         templateResolver.setSuffix(".html");
 
         return templateResolver;
