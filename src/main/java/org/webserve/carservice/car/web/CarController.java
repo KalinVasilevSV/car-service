@@ -8,5 +8,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/cars")
 public class CarController {
 
+    @GetMapping
+    public String cars(){
+        return "redirect:/cars/viewAllCars";
+    }
+    @RequestMapping("/viewAllCars")
+    public String viewAllCars(){
+        return "/car/viewAllCars";
+    }
 
 }
