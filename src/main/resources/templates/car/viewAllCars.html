@@ -1,10 +1,39 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>viewAllCars</title>
 </head>
 <body>
 
+<h1>This is a list of all cars!</h1>
+
+<section>
+<table>
+    <thead>
+    <th>ID</th>
+    <th>Current Owner</th>
+    <th>Make</th>
+    <th>Model</th>
+    <th>Production Year</th>
+    <th>Registration</th>
+    <th>View</th>
+    </thead>
+    <tbody>
+    <th:block th:each="car:${cars}">
+        <tr>
+            <td th:text="${car.getId()}"></td>
+            <td th:text="${car.getCurrentOwner()}"></td>
+            <td th:text="${car.getMake()}"></td>
+            <td th:text="${car.getModel()}"></td>
+            <td th:text="${car.getProductionYear()}"></td>
+            <td th:text="${car.getRegistration()}"></td>
+            <td><a th:href="@{/cars/{carId}(carId=*{car.getId()})}">View</a></td>
+        </tr>
+    </th:block>
+    </tbody>
+</table>
+
+</section>
 </body>
 </html>

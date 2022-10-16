@@ -1,10 +1,57 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>viewCar</title>
 </head>
 <body>
+<h1>Car Details</h1>
+
+<section>
+    <th:block th:object="${car}">
+        <div>Car ID: <span th:text="${car.getId()}">car_id</span></div>
+        <div>Current owner: <span th:text="${car.getCurrentOwner()}">current_owner</span></div>
+        <div>Make: <span th:text="${car.getMake()}">make</span></div>
+        <div>Model: <span th:text="${car.getModel()}">model</span></div>
+        <div>Production year: <span th:text="${car.getProductionYear()}">production_year</span></div>
+        <div>Registration(licence plate): <span th:text="${car.getRegistration()}">registration</span></div>
+
+        <div><a th:href="@{/cars/addCarService}">Add a car service</a></div>
+        <div><a th:href="@{/cars/deleteCar}">Delete car</a></div>
+        <div>
+            <table>
+                <thead>
+                <th>ID</th>
+                <th>Date</th>
+                <th>Odometer Reading</th>
+                <th>Description</th>
+                <th>Scheduled</th>
+                <th>Next Date</th>
+                <th>Next Change In(km)</th>
+
+                <th>Edit</th>
+                <th>Delete</th>
+                </thead>
+                <tbody>
+                <th:block th:each="service:${car.getCarService()}">
+                    <tr>
+                        <td th:text="${service.getId()}"></td>
+                        <td th:text="${service.getDate()}"></td>
+                        <td th:text="${service.getOdometerReading()}"></td>
+                        <td th:text="${service.getDescription()}"></td>
+                        <td th:text="${service.isScheduled()}"></td>
+                        <td th:text="${service.getNextDate()}"></td>
+                        <td th:text="${service.getNextChangeIn()}"></td>
+
+                        <td><a th:href="@{/cars/editCarService}">Edit</a></td>
+                        <td><a th:href="@{/cars/deleteCarService}">Delete</a></td>
+                    </tr>
+                </th:block>
+                </tbody>
+            </table>
+        </div>
+    </th:block>
+</section>
 
 </body>
 </html>

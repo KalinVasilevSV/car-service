@@ -21,6 +21,10 @@ public class CarDataService {
         return carDataRepository.findAll();
     }
 
+    public Optional<Car> getById(Long id){
+        return carDataRepository.findById(id);
+    }
+
     public List<Car> getByCurrentOwner(String currentOwner) {
         return carDataRepository.findByCurrentOwner(currentOwner);
     }

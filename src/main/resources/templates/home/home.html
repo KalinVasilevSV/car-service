@@ -1,8 +1,15 @@
-<html>
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <title>Car Service Home DEV-Snapshot</title>
 </head>
+
 <body>
 <h1> Welcome to Car Service Home</h1>
+
+<a th:href="@{/cars/viewAllCars}">View All Cars</a>
+<a th:href="@{/cars/addCar}">Add a New Car</a>
 </body>
+
 </html>
