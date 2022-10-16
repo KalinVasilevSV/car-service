@@ -27,8 +27,6 @@ public class Car {
     private Date productionYear;
     @NotBlank
     private String registration;
-    //TODO
-    // solve table reference
-//    @OneToMany(targetEntity = CarService.class)
-//    private Set<CarService> serviceHistory;
+    @OneToMany(mappedBy = "car")
+    private Set<CarService> carService;
 }

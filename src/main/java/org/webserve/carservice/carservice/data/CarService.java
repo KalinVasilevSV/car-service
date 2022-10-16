@@ -1,9 +1,9 @@
 package org.webserve.carservice.carservice.data;
 
 import lombok.Data;
+import org.webserve.carservice.car.data.Car;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.sql.Date;
@@ -24,4 +24,7 @@ public class CarService {
     private Date nextDate;
     @NotNull
     private Long nextChangeIn;
+    @ManyToOne
+    @JoinColumn(name = "car_id",nullable = false)
+    private Car car;
 }
