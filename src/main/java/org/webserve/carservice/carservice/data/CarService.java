@@ -8,6 +8,8 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.sql.Date;
 
+import static javax.persistence.FetchType.EAGER;
+
 @Entity
 @Data
 public class CarService {
@@ -24,7 +26,7 @@ public class CarService {
     private Date nextDate;
     @NotNull
     private Long nextChangeIn;
-    @ManyToOne
+    @ManyToOne(fetch = EAGER)
     @JoinColumn(name = "car_id",nullable = false)
     private Car car;
 }

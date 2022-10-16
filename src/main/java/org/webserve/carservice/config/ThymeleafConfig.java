@@ -11,7 +11,7 @@ import org.thymeleaf.spring5.view.ThymeleafViewResolver;
 public class ThymeleafConfig {
 
     @Bean
-    public SpringResourceTemplateResolver templateResolver(ApplicationContext applicationContext){
+    public SpringResourceTemplateResolver templateResolver(ApplicationContext applicationContext) {
         SpringResourceTemplateResolver templateResolver = new SpringResourceTemplateResolver();
         templateResolver.setApplicationContext(applicationContext);
         templateResolver.setPrefix("classpath:/templates/");
@@ -21,7 +21,7 @@ public class ThymeleafConfig {
     }
 
     @Bean
-    public SpringTemplateEngine templateEngine(SpringResourceTemplateResolver templateResolver){
+    public SpringTemplateEngine templateEngine(SpringResourceTemplateResolver templateResolver) {
         SpringTemplateEngine templateEngine = new SpringTemplateEngine();
         templateEngine.setTemplateResolver(templateResolver);
         templateEngine.setEnableSpringELCompiler(true);
@@ -30,7 +30,7 @@ public class ThymeleafConfig {
     }
 
     @Bean
-    public ThymeleafViewResolver viewResolver(SpringTemplateEngine templateEngine){
+    public ThymeleafViewResolver viewResolver(SpringTemplateEngine templateEngine) {
         ThymeleafViewResolver viewResolver = new ThymeleafViewResolver();
         viewResolver.setTemplateEngine(templateEngine);
         viewResolver.setOrder(1);

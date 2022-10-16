@@ -3,14 +3,14 @@ package org.webserve.carservice.car.data;
 import lombok.Data;
 import org.webserve.carservice.carservice.data.CarService;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.sql.Date;
 import java.util.Set;
+
+import static javax.persistence.CascadeType.REMOVE;
+import static javax.persistence.FetchType.EAGER;
 
 @Entity
 @Data
@@ -27,6 +27,6 @@ public class Car {
     private Date productionYear;
     @NotBlank
     private String registration;
-    @OneToMany(mappedBy = "car")
+    @OneToMany(mappedBy = "car", fetch = EAGER, cascade = REMOVE)
     private Set<CarService> carService;
 }

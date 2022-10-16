@@ -9,11 +9,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class CarController {
 
     @GetMapping
-    public String cars(){
+    public String cars() {
         return "redirect:/cars/viewAllCars";
     }
+
     @RequestMapping("/viewAllCars")
-    public String viewAllCars(){
+    public String viewAllCars() {
         return "/car/viewAllCars";
     }
 

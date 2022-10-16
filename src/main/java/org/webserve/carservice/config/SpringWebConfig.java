@@ -5,12 +5,11 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
-// TODO
-// maybe remove
-
 @Configuration
-@EnableWebMvc // move to another config class before deleting if at all
+@EnableWebMvc
 public class SpringWebConfig {
     @Bean
-    public static ModelMapper modelMapper(){return new ModelMapper();}
+    public static ModelMapper modelMapper() {
+        return new ModelMapper();
+    }
 }
