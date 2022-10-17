@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.webserve.carservice.car.data.Car;
 import org.webserve.carservice.car.service.CarDataService;
 
@@ -39,22 +40,32 @@ public class CarController {
         return "/car/addCar";
     }
     @PostMapping("/addCar")
-    public String addCar(@ModelAttribute Car car, BindingResult bindingResult){
+    public String addCar(@ModelAttribute Car car, BindingResult bindingResult, RedirectAttributes redirectAttributes){
         if(bindingResult.hasErrors()){
             return "/car/addCar";
         }
 
-        carDataService.saveCar(car);
-        return "/car/viewCar";
+        Long savedCarId = carDataService.saveCar(car).getId();
+        redirectAttributes.addAttribute("savedCarId",savedCarId);
+        return "redirect:/cars/{savedCarId}";
+    }
+
+    @GetMapping("/editCar")
+    public String editCar(@RequestParam Long id, Model model){
+        Car car = carDataService.getById(id).orElseThrow();
+        model.addAttribute("car",car);
+        return "/car/editCar";
     }
 
     @PostMapping("/editCar")
-    public String editCar(@ModelAttribute Car car, BindingResult bindingResult){
+    public String editCar(@ModelAttribute Car car, BindingResult bindingResult, RedirectAttributes redirectAttributes){
         if(bindingResult.hasErrors())
             return "/car/editCar";
 
+        Long editedCarId = car.getId();
+        redirectAttributes.addAttribute("editedCarId",editedCarId);
         carDataService.saveCar(car);
-        return "/car/viewCar";
+        return "redirect:/cars/{editedCarId}";
     }
 
     @PostMapping("/deleteCar")

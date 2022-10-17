@@ -8,5 +8,34 @@
 
 <h1> Edit a Car</h1>
 
+<form th:action="@{/cars/addCar}" th:method="post" th:object="${car}">
+    <div>
+        Car ID: <span th:text="*{id}">id</span>
+    </div>
+    <div>
+        <label for="currentOwner">Current owner:</label>
+        <input id="currentOwner" type="text" th:field="*{currentOwner}">
+    </div>
+    <div>
+        <label for="make">Make:</label>
+        <input id="make" type="text" th:field="*{make}">
+    </div>
+    <div>
+        <label for="model">Model:</label>
+        <input id="model" type="text" th:field="*{model}">
+    </div>
+    <div>
+        <label for="productionYear">Production year:</label>
+        <input id="productionYear" type="text" th:field="*{productionYear}">
+    </div>
+    <div>
+        <label for="registration">Registration(licence plate):</label>
+        <input id="registration" type="text" th:field="*{registration}">
+    </div>
+    <div>
+        <input type="submit" value="Save car">
+    </div>
+</form>
+
 </body>
 </html>
