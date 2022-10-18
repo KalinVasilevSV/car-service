@@ -33,9 +33,11 @@
         <input id="registration" type="text" th:field="*{registration}">
     </div>
     <div>
-        <input type="submit" value="Save car">
+        <input type="submit" value="Update car">
     </div>
 </form>
+
+<a th:href="@{/cars/{carId}(id=*{car.getId()})}">Cancel</a>
 
 </body>
 </html>

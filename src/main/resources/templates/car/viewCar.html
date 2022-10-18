@@ -22,8 +22,13 @@
                 <input type="hidden" th:field="*{id}" th:value="${car.getId()}">
                 <input type="submit" value="EditCar">
             </form>
-            <a th:href="@{/cars/editCar}">Edit car</a></div>
-        <div><a th:href="@{/cars/deleteCar}">Delete car</a></div>
+        </div>
+        <div>
+            <form th:action="@{/cars/deleteCar}" th:method="post" th:object="${car}">
+                <input type="hidden" th:field="*{id}" th:value="${car.getId()}">
+                <input type="submit" th:value="Delete car">
+            </form>
+        </div>
         <div>
             <table>
                 <thead>

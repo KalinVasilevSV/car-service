@@ -69,12 +69,8 @@ public class CarController {
     }
 
     @PostMapping("/deleteCar")
-    public String deleteCar(@ModelAttribute Car car,BindingResult bindingResult){
-        if(bindingResult.hasErrors())
-            return "/car/viewCar";
-        //TODO
-        // change view
-        carDataService.deleteCar(car);
+    public String deleteCar(@RequestParam Long id){
+        carDataService.deleteCarById(id);
         return "/car/viewAllCars";
     }
 }
