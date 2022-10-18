@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.webserve.carservice.car.data.Car;
 import org.webserve.carservice.car.service.CarDataService;
+import org.webserve.carservice.carservice.data.CarService;
+import org.webserve.carservice.carservice.service.CarServiceService;
 
 @Controller
 @RequiredArgsConstructor
@@ -15,6 +17,7 @@ import org.webserve.carservice.car.service.CarDataService;
 public class CarController {
 
     private final CarDataService carDataService;
+    private final CarServiceService carServiceService;
 
     @GetMapping
     public String cars() {
@@ -73,4 +76,25 @@ public class CarController {
         carDataService.deleteCarById(id);
         return "/car/viewAllCars";
     }
+
+    @GetMapping("/{carId}/addCarService")
+    public String addCarService(@PathVariable Long carId, Model model){
+        model.addAttribute("car",carDataService.getById(carId).orElseThrow());
+        model.addAttribute("service", new CarService());
+        return "/carservice/addCarService";
+    }
+
+    @PostMapping("/{carId}/addCarService")
+    public String addCarService(@PathVariable Long carId,@ModelAttribute CarService carService,BindingResult bindingResult, RedirectAttributes redirectAttributes){
+        if(bindingResult.hasErrors())
+            return "/carservice/addCarService";
+
+        Car car = carDataService.getById(carId).orElseThrow();
+        carService.setCar(car);
+        carServiceService.saveCarService(carService);
+        redirectAttributes.addAttribute("carId",carId);
+        return "redirect:/{carId}";
+    }
+
+    @GetMapping("/{carId}/editCarService")
 }

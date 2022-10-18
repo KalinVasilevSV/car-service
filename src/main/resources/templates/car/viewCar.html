@@ -54,7 +54,10 @@
                         <td th:text="${service.getNextDate()}"></td>
                         <td th:text="${service.getNextChangeIn()}"></td>
 
-                        <td><a th:href="@{/cars/editCarService}">Edit</a></td>
+                        <td>
+                            <form></form>
+                            <a th:href="@{/cars/editCarService}">Edit</a>
+                        </td>
                         <td><a th:href="@{/cars/deleteCarService}">Delete</a></td>
                     </tr>
                 </th:block>

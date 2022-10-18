@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>addCarService</title>
+</head>
+<body>
+<h1>Add a car service</h1>
+<section>
+    <th:block th:object="${car}">
+        <div>Car ID: <span th:text="${car.getId()}">car_id</span></div>
+        <div>Current owner: <span th:text="${car.getCurrentOwner()}">current_owner</span></div>
+        <div>Make: <span th:text="${car.getMake()}">make</span></div>
+        <div>Model: <span th:text="${car.getModel()}">model</span></div>
+        <div>Production year: <span th:text="${car.getProductionYear()}">production_year</span></div>
+        <div>Registration(licence plate): <span th:text="${car.getRegistration()}">registration</span></div>
+    </th:block>
+</section>
+
+<section>
+    <form th:action="@{/{carId}/addCarService(carId=${car.getId()})}" th:method="post" th:object="${service}">
+        <div>
+            <label for="date">Date: </label>
+            <input id="date" type="text" th:field="*{id}">
+        </div>
+        <div>
+            <label for="odometer">Odometer reading(km): </label>
+            <input id="odometer" type="number" th:field="*{odometerReading}">
+        </div>
+        <div>
+            <label for="description">Description: </label>
+            <input id="description" type="text" th:field="*{description}">
+        </div>
+        <div>
+            <label for="scheduled">Scheduled: </label>
+            <input id="scheduled" type="checkbox" th:field="*{scheduled}">
+        </div>
+        <div>
+            <label for="nextDate">Next service date: </label>
+            <input id="nextDate" type="date" th:field="*{nextDate}">
+        </div>
+        <div>
+            <label for="nextChangeIn">Next change in(km): </label>
+            <input id="nextChangeIn" type="number" th:field="*{nextChangeIn}">
+        </div>
+        <div>
+            <input type="submit" value="Add service">
+        </div>
+    </form>
+
+    <a th:href="@{/cars/{carId}(carId=${car.getId()})}">Cancel</a>
+
+</section>
+
+</body>
+</html>
