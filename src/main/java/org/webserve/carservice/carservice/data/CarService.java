@@ -9,11 +9,13 @@ import javax.validation.constraints.NotNull;
 import java.sql.Date;
 
 import static javax.persistence.FetchType.EAGER;
+import static javax.persistence.FetchType.LAZY;
 
 @Entity
 @Data
 public class CarService {
     @Id
+    @GeneratedValue
     private Long id;
     @NotNull
     private Date date;
@@ -26,7 +28,7 @@ public class CarService {
     private Date nextDate;
     @NotNull
     private Long nextChangeIn;
-    @ManyToOne(fetch = EAGER)
+    @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "car_id",nullable = false)
     private Car car;
 }

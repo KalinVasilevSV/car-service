@@ -1,6 +1,8 @@
 package org.webserve.carservice.car.data;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import org.webserve.carservice.carservice.data.CarService;
 
 import javax.persistence.*;
@@ -30,5 +32,7 @@ public class Car {
     @NotBlank
     private String registration;
     @OneToMany(mappedBy = "car", fetch = EAGER, cascade = REMOVE)
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
     private Set<CarService> carService;
 }

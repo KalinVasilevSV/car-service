@@ -16,7 +16,12 @@
         <div>Production year: <span th:text="${car.getProductionYear()}">production_year</span></div>
         <div>Registration(licence plate): <span th:text="${car.getRegistration()}">registration</span></div>
 
-        <div><a th:href="@{/cars/addCarService}">Add a car service</a></div>
+        <div>
+            <form th:action="@{/cars/addCarService}" th:method="get" th:object="${car}">
+                <input type="hidden" th:field="*{id}" th:value="*{id}">
+                <input type="submit" value="Add car service">
+            </form>
+        </div>
         <div>
             <form th:action="@{/cars/editCar}" th:method="get" th:object="${car}">
                 <input type="hidden" th:field="*{id}" th:value="${car.getId()}">
@@ -26,7 +31,7 @@
         <div>
             <form th:action="@{/cars/deleteCar}" th:method="post" th:object="${car}">
                 <input type="hidden" th:field="*{id}" th:value="${car.getId()}">
-                <input type="submit" th:value="Delete car">
+                <input type="submit" value="Delete car">
             </form>
         </div>
         <div>
@@ -55,8 +60,11 @@
                         <td th:text="${service.getNextChangeIn()}"></td>
 
                         <td>
-                            <form></form>
-                            <a th:href="@{/cars/editCarService}">Edit</a>
+                            <form th:action="@{/cars/editCarService}" th:method="get">
+                                <input type="hidden" th:field="carId" th:value="*{id}">
+                                <input type="hidden" th:field="serviceId" th:value="${service.getId()}">
+                                <input type="submit" value="Edit">
+                            </form>
                         </td>
                         <td><a th:href="@{/cars/deleteCarService}">Delete</a></td>
                     </tr>

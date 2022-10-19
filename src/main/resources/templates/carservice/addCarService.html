@@ -18,10 +18,10 @@
 </section>
 
 <section>
-    <form th:action="@{/{carId}/addCarService(carId=${car.getId()})}" th:method="post" th:object="${service}">
+    <form th:action="@{/cars/addCarService/{carId}(carId=${car.getId()})}" th:method="post" th:object="${service}">
         <div>
             <label for="date">Date: </label>
-            <input id="date" type="text" th:field="*{id}">
+            <input id="date" type="date" th:field="*{date}">
         </div>
         <div>
             <label for="odometer">Odometer reading(km): </label>

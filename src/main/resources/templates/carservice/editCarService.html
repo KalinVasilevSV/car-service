@@ -18,7 +18,7 @@
 </section>
 
 <section>
-    <form th:action="@{/{carId}/addCarService(carId=${car.getId()})}" th:method="post" th:object="${service}">
+    <form th:action="@{/editCarService}" th:method="post" th:object="${service}">
         <div>
             Service ID: <span th:text="*{id}">service_id</span>
         </div>
