@@ -37,7 +37,9 @@
     </div>
 </form>
 
-<a th:href="@{/cars/{carId}(id=*{car.getId()})}">Cancel</a>
+<a th:href="@{/cars/{carId}(carId=*{car.getId()})}">Cancel</a>
+
+<!--<a th:href="@{/cars/{carId}(id=*{car.getId()})}">Cancel</a> // this is how to add query params, add a new variable after the url path-->
 
 </body>
 </html>

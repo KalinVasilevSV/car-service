@@ -18,7 +18,7 @@
 </section>
 
 <section>
-    <form th:action="@{/editCarService}" th:method="post" th:object="${service}">
+    <form th:action="@{/cars/{carId}/editCarService(carId=${car.getId()})}" th:method="post" th:object="${service}">
         <div>
             Service ID: <span th:text="*{id}">service_id</span>
         </div>
@@ -47,7 +47,7 @@
             <input id="nextChangeIn" type="number" th:field="*{nextChangeIn}">
         </div>
         <div>
-            <input type="submit" value="Add service">
+            <input type="submit" value="Update service">
         </div>
     </form>
 

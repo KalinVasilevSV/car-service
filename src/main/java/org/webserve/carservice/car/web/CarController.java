@@ -85,41 +85,53 @@ public class CarController {
         return "/carservice/addCarService";
     }
 
-    @PostMapping("/addCarService/{carId}")
+    @PostMapping("/{carId}/addCarService")
     public String addCarService(@PathVariable Long carId, @ModelAttribute CarService carService, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
         if (bindingResult.hasErrors())
             return "/carservice/addCarService";
 
         Car car = carDataService.getById(carId).orElseThrow();
         car.getCarService().add(carService);
-        carDataService.updateCar(car);
         carService.setCar(car);
         carServiceService.saveCarService(carService);
+        carDataService.saveCar(car);
         redirectAttributes.addAttribute("carId", carId);
         return "redirect:/cars/{carId}";
     }
 
     @GetMapping("/editCarService")
     public String editCarService(@RequestParam Long carId, @RequestParam Long serviceId, Model model) {
-        model.addAttribute("car", carDataService.getById(carId));
-        model.addAttribute("service", carServiceService.getByCarServiceId(serviceId));
+        model.addAttribute("car", carDataService.getById(carId).orElseThrow());
+        model.addAttribute("service", carServiceService.getByCarServiceId(serviceId).orElseThrow());
 
         return "/carservice/editCarService";
     }
 
-    @PostMapping("/editCarService")
-    public String editCarService(@ModelAttribute Car car, BindingResult carBindingResult,
-                                 @ModelAttribute CarService carService, BindingResult serviceBindingResult,
+    @PostMapping("/{carId}/editCarService")
+    public String editCarService(@PathVariable Long carId,
+                                 @ModelAttribute CarService carService, BindingResult bindingResult,
                                  RedirectAttributes redirectAttributes) {
 
-        redirectAttributes.addAttribute("carId", car.getId());
+        if(bindingResult.hasErrors()){
+            return "redirect:/editCarService";
+        }
+
+        Car car = carDataService.getById(carId).orElseThrow();
+        redirectAttributes.addAttribute("carId", carId);
         redirectAttributes.addAttribute("serviceId", carService.getId());
 
-        if (carBindingResult.hasErrors() || serviceBindingResult.hasErrors())
-            return "redirect:/{carId}/editCarService/{serviceId}";
-
         car.getCarService().add(carService);
-        carDataService.updateCar(car);
+        carService.setCar(car);
+        carDataService.saveCar(car);
+        carServiceService.saveCarService(carService);
+        return "redirect:/cars/{carId}";
+    }
+
+    @PostMapping("/deleteCarService")
+    public String deleteCarService(@RequestParam Long carId,@RequestParam Long serviceId,RedirectAttributes redirectAttributes){
+        carServiceService.deleteCarService(serviceId);
+        redirectAttributes.addAttribute("carId",carId);
+
         return "redirect:/cars/{carId}";
     }
 }

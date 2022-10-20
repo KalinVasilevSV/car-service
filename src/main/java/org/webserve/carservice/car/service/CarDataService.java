@@ -37,10 +37,6 @@ public class CarDataService {
         return carDataRepository.save(car);
     }
 
-    public Car updateCar(Car updatedCar) {
-        return carDataRepository.save(updatedCar);
-    }
-
     public void deleteCarById(Long id) {
         carDataRepository.deleteById(id);
     }

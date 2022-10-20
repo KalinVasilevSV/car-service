@@ -32,8 +32,7 @@ public class CarServiceService {
         return carServiceRepository.save(updatedCarService);
     }
 
-    public CarService deleteCarService(CarService carService) {
-        carServiceRepository.delete(carService);
-        return carService;
+    public void deleteCarService(Long serviceId) {
+        carServiceRepository.deleteById(serviceId);
     }
 }
