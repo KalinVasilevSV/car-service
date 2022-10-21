@@ -5,3 +5,4 @@ build/*
 !/build
 !/build/libs
 !/build/libs/*
+docker/car-service-DEV-SNAPSHOT.jar
